@@ -1,0 +1,10 @@
+# Основне (Tesseract ставиться окремо — див. README.md)
+opencv-python-headless>=4.8
+numpy>=1.24
+pillow>=10.0
+pillow-heif>=0.16      # фото .heic з айфона
+pytesseract>=0.3.10
+rapidfuzz>=3.0         # швидкий підрахунок CER/WER в evaluate.py
+
+# Необов'язково: альтернативний рушій для порівняння (тягне PyTorch, ~2 ГБ)
+# easyocr>=1.7

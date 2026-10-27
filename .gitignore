@@ -1,0 +1,9 @@
+__pycache__/
+.eval_cache/
+.venv/
+tessdata_best/
+tessdata_fast/
+# Результати ocr.py поруч із тестовими картинками
+tests/*.txt
+!tests/*.gt.txt
+tests_seed*

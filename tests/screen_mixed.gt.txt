@@ -1,0 +1,12 @@
+Інструкція з налаштування середовища
+
+1. Завантаж Python 3.12 з офіційного сайту python.org і під час встановлення познач пункт «Add
+Python to PATH».
+
+2. Відкрий термінал (PowerShell або Windows Terminal) і виконай команду pip install opencv-python
+pytesseract.
+
+3. Перевір, що все працює: команда python --version має показати номер версії.
+
+Порада: якщо бачиш помилку ModuleNotFoundError, найчастіше пакет встановлено в інше
+середовище (virtual environment).
