@@ -7,3 +7,4 @@ tessdata_fast/
 tests/*.txt
 !tests/*.gt.txt
 tests_seed*
+web_tests*

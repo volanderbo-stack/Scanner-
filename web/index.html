@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Сканер тексту</title>
+  <meta name="description" content="Текст з фото й скріншотів українською та англійською. Працює прямо на телефоні, без інтернету.">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16171a" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Сканер">
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M8 9h8M8 12h8M8 15h5"/></svg>
+      <span>Сканер тексту</span>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- Порожній стан -->
+    <section id="start" class="start">
+      <h1>Текст з фото за кілька секунд</h1>
+      <p class="muted">Сфотографуй сторінку, конспект чи екран або вибери скріншот. Українська й англійська.</p>
+      <div class="actions">
+        <label class="btn primary big">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          Сфотографувати
+          <input id="camera" type="file" accept="image/*" capture="environment" hidden>
+        </label>
+        <label class="btn big">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 9"/></svg>
+          Вибрати фото
+          <input id="gallery" type="file" accept="image/*" hidden>
+        </label>
+      </div>
+      <button id="last" class="link" hidden>Показати останній текст</button>
+      <ul class="tips">
+        <li>Тримай телефон рівно над сторінкою, щоб текст був чітким.</li>
+        <li>Фото не відправляється в інтернет — усе розпізнається на телефоні.</li>
+        <li>Перший раз завантажуються мовні моделі (~10 МБ), далі працює й без інтернету.</li>
+      </ul>
+    </section>
+
+    <!-- Обробка -->
+    <section id="work" class="work" hidden>
+      <img id="preview" alt="Вибране фото">
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+        <div id="bar"></div>
+      </div>
+      <p id="status" class="muted">Готую фото…</p>
+    </section>
+
+    <!-- Результат -->
+    <section id="result" class="result" hidden>
+      <div class="result-head">
+        <img id="thumb" alt="">
+        <p id="meta" class="muted"></p>
+      </div>
+      <div class="seg" role="group" aria-label="Як показати текст">
+        <button id="modePara" class="on" aria-pressed="true">Абзаци</button>
+        <button id="modeLines" aria-pressed="false">Як на фото</button>
+      </div>
+      <textarea id="text" spellcheck="false" aria-label="Розпізнаний текст"></textarea>
+      <p class="muted small">Текст можна підправити прямо тут перед копіюванням.</p>
+    </section>
+  </main>
+
+  <nav id="bottom" class="bottom" hidden>
+    <button id="copy" class="btn primary">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+      Копіювати
+    </button>
+    <button id="share" class="btn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      Поділитися
+    </button>
+    <button id="again" class="btn icon-only" aria-label="Нове фото" title="Нове фото">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </nav>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./vendor/tesseract.min.js"></script>
+  <script src="./ocr-core.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

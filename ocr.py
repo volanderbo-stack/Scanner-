@@ -595,10 +595,10 @@ def join_hyphens(lines):
 def postprocess(text, s: Settings):
     text = APOS.sub("’", text)
     if s.punct:
-        text = re.sub(r"(?<= )--?(?= )", "—", text)          # « -- » → « — »
+        text = re.sub(r"(?m)(?<= )--?(?=\s|$)", "—", text)    # « -- » → « — »
         text = re.sub(r"(?m)^[|\]] (?=[а-яґєії])", "І ", text)  # «| наостанок» → «І наостанок»
         # знак номера; «її/їй» — лише перед довгим числом (бо «їй 5 років» — звичайні слова)
-        text = re.sub(r"(?<!\w)(?:Ne|N°|Nº|N2|Мо) ?(?=\d)|(?<!\w)(?:її|їй) ?(?=\d{3})", "№ ", text)
+        text = re.sub(r"(?<!\w)(?:Ne|N°|Nº|N2|Мо) ?(?=\d)|(?<!\w)(?:її|їй|&) ?(?=\d{3})", "№ ", text)
     if s.homoglyph:
         text = fix_homoglyphs(text)
     text = re.sub(r"[ \t]+", " ", text)
